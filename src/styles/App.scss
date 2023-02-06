@@ -1,7 +1,7 @@
 .App
 {
     text-align: center;
-    background-color: #282c34;
+    background-color: #2a2f40;
 }
 
 main
@@ -32,11 +32,12 @@ p
 .App-link
 {
     color: #61dafb;
+    text-decoration: none;
 }
 
 #smallBusisnessImg
 {
-    max-height: 33vh;
+    max-height: 25vh;
 }
 
 #jsImg
@@ -45,7 +46,7 @@ p
     margin: 5.5px;
 }
 
-#pageLogo
+#cogLogo
 {
     max-width: 25vw;
 }
