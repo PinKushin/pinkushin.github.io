@@ -1,0 +1,29 @@
+html
+{
+    background-color: #2a2f40;
+}
+
+.loader
+{
+    position: absolute;
+    top: calc(50% - 4em);
+    left: calc(50% - 4em);
+}
+
+.loader--hide
+{
+    opacity: 0;
+}
+
+@keyframes load8
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }
+
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
