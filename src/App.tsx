@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './components/NavBar';
 import './styles/App.scss';
-import SmallBusisness from './assets/SmallBusisness.jpg';
+//import SmallBusisness from './assets/SmallBusisness.jpg';
 import JSimg from './assets/JS.jpg';
-import logo from './assets/FullLogoRound.png';
+//import logo from './assets/FullLogoRound.png';
 import cog from './assets/CogRound.png';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -17,25 +17,23 @@ if ( !loader )
     throw new DOMException( 'preload image not found' );
 }
 
-
-
 interface Props
 {
 }
 
-const App : React.FC<Props> = ( ) =>
+const App : React.FC<Props> = () =>
 {
-    const [ title, setTitle ] = useState( 'JDM Development' );
-    const [ theme, setTheme ] = useState<string>( 'default' );
+    const [ title, /*setTitle*/ ] = useState( 'JDM Development' );
+    // const [ theme, setTheme ] = useState<string>( 'default' );
+
     // if you want to show the loader when React loads data again
-    const showLoader = () => loader.classList.remove( 'loader--hide' );
+    // const showLoader = () => loader.classList.remove( 'loader--hide' );
     const hideLoader = () => loader.classList.add( 'loader--hide' );
     useEffect( hideLoader );
     useEffect( () =>
     {
         document.title = title;
     }, [ title ] );
-
 
     return (
         <nav className="App">
@@ -54,7 +52,7 @@ const App : React.FC<Props> = ( ) =>
                                         href='https://www.linkedin.com/in/john-moore-b32b37259/'
                                         className='App-link'><i className="lab la-linkedin"></i> LinkedIn</a>.
                                 You can reach out to me at <a className='App-link'
-                                    href='mailto: JDMDev4u@gmail.com?subject=Software%20Development%20Quote%20Needed&cc=PinKushin@verizon.net'>JDMDev4u@gmail.com</a> with any questions or for employment opportunities. Thank you for your consideration.
+                                    href='mailto: JDMDev4u@gmail.com?subject=Software%20Development%20Quote%20Needed&cc=PinKushin@verizon.net'>JDMDev4u@gmail.com</a> with any questions or employment opportunities. Thank you for your consideration.
                             </p>
                         </Col>
                         <Col sm={ 12 } md={ 4 }>
@@ -66,10 +64,10 @@ const App : React.FC<Props> = ( ) =>
                     </Row>
                     <Row className='m-4 p-4'>
                         <Col sm={ 12 } md={ 6 }>
-                            <Image className='fluid rounded-circle'
-                                src={ SmallBusisness }
-                                alt='Support a small busisness'
-                                id='smallBusisnessImg' />
+                            <Image className='fluid rounded'
+                                src={ JSimg }
+                                alt='Javascript Code'
+                                id='pricingImg' />
                         </Col>
                         <Col sm={ 12 } md={ 6 }>
                             <h3 id='pricing'>Pricing</h3>
@@ -86,6 +84,6 @@ const App : React.FC<Props> = ( ) =>
             <PageFooter />
         </nav>
     );
-}
+};
 
 export default App;

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import '../styles/PageFooter.scss';
 import logo from '../assets/FullLogoRound.png';
 import Container from 'react-bootstrap/Container';
@@ -9,10 +9,10 @@ import Image from 'react-bootstrap/Image';
 function PageFooter()
 {
     return (
-        <footer className="page-footer font-small blue pt-4">
-            <Container className="container-fluid text-center text-md-left">
-                <Row className="row">
-                    <Col className="md-6 mt-md-0 mt-3">
+        <footer className="page-footer font-small pt-3">
+            <Container className='fluid'>
+                <Row>
+                    <Col className="md-6 mt-md-0">
                         <Image className='fluid mb-2'
                             src={ logo }
                             alt='logo'
@@ -95,9 +95,9 @@ function PageFooter()
                 </Row>
             </Container>
 
-            <div className="footer-copyright text-center py-3">
+            <Container className="footer-copyright text-center">
                 <i className="lar la-copyright"></i>2023 Copyright - <a href="https://pinkushin.github.io">John Moore</a>
-            </div>
+            </Container>
 
         </footer>
     );
