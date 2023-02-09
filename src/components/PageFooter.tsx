@@ -23,7 +23,7 @@ function PageFooter()
                                     <a href="mailto: JDMDev4u@gmail.com?cc=pinkushin@verizon.net&subject=Software%20Development%20Quote%20Needed"
                                         target='_blank'
                                         rel='noreferrer'>
-                                        <i className="las la-at" aria-placeholder='E-mail'></i> E-Mail Me
+                                        <i className="las la-at"></i> E-Mail Me
                                     </a>
                                 </li>
                                 <li>

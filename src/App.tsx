@@ -52,7 +52,7 @@ const App : React.FC<Props> = () =>
                                         href='https://www.linkedin.com/in/john-moore-b32b37259/'
                                         className='App-link'><i className="lab la-linkedin"></i> LinkedIn</a>.
                                 You can reach out to me at <a className='App-link'
-                                    href='mailto: JDMDev4u@gmail.com?subject=Software%20Development%20Quote%20Needed&cc=PinKushin@verizon.net'>JDMDev4u@gmail.com</a> with any questions or employment opportunities. Thank you for your consideration.
+                                    href='mailto: JDMDev4u@gmail.com?subject=Software%20Development%20Quote%20Needed&cc=PinKushin@verizon.net'><i className="lar la-envelope"></i> JDMDev4u@gmail.com</a> with any questions or employment opportunities. Thank you for your consideration.
                             </p>
                         </Col>
                         <Col sm={ 12 } md={ 4 }>
