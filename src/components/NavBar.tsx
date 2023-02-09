@@ -15,17 +15,20 @@ function NavBar()
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="./">
+                        <Nav.Link href="./" active>
                             <i className="las la-home"></i> Home
                         </Nav.Link>
-                        <NavDropdown title="Portfolio" id="portfolioNav">
+                        <NavDropdown menuVariant='dark' title="Portfolio" id="portfolioNav">
+                            <h6>Websites</h6>
                             <NavDropdown.Item href="https://pinkushin.github.io/markdownpreviewerreact"
                                 target='_blank'
                                 rel='noreferrer'>
                                 <i className="lab la-markdown"></i> Markdown Previewer
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
+                            <NavDropdown.Item href="https://pinkushin.github.io/randomquotepage"
+                                target='_blank'
+                                rel='noreferrer'>
+                                <i className="las la-quote-right"></i> Random Quote Generator
                             </NavDropdown.Item>
                             <NavDropdown.Item href="https://pinkushin.github.io/Mobile-Mechanics-LLP/"
                                 target='_blank'
@@ -33,9 +36,11 @@ function NavBar()
                                 <i className="las la-car-side">
                                 </i> Mobile Mechanics LLP
                             </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
+                            <h6>Software</h6>
+                            <NavDropdown.Item href="https://github.com/PinKushin/FuelEconomyLogWPF"
+                                target='_blank'
+                                rel='noreferrer'>
+                                <i className="las la-gas-pump"></i> Fuel Economy Log WPF
                             </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#pricing">
