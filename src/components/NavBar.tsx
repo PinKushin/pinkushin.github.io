@@ -8,6 +8,20 @@ import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 
 function NavBar()
 {
+    const toggleCerts = () =>
+    {
+        const certs = document.querySelector<HTMLElement>( '.carousel' );
+        if ( !certs )
+        {
+            throw new DOMException( 'certification images not found' );
+        }
+        if ( !certs.classList.contains( 'visually-hidden' ) )
+        {
+            certs.classList.add( 'visually-hidden' );
+            return;
+        }
+        certs.classList.remove( 'visually-hidden' );
+    };
     return (
         <Navbar className='p-1' collapseOnSelect expand="md" variant='dark'>
             <Container>
@@ -45,6 +59,9 @@ function NavBar()
                         </NavDropdown>
                         <Nav.Link href="#pricing">
                             <i className="las la-dollar-sign"></i> Pricing
+                        </Nav.Link>
+                        <Nav.Link href='#certsHeader' onClick={ toggleCerts }>
+                            <i className="las la-certificate"></i> Certificates
                         </Nav.Link>
                         <Nav.Link href="https://www.github.com/pinkushin"
                             target='_blank'

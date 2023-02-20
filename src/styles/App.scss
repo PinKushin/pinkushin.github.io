@@ -11,7 +11,6 @@ main
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
     color: white;
 }
 
@@ -33,13 +32,18 @@ h6
 p
 {
     font-size: 1rem;
-    padding: 2px;
+    padding-top: 1rem;
 }
 
 .App-link
 {
     color: #61dafb;
     text-decoration: none;
+}
+
+.certs
+{
+    max-height: 75vh;
 }
 
 #smallBusisnessImg
@@ -50,7 +54,7 @@ p
 #pricingImg
 {
     max-width: 30vw;
-    margin: 5.5px;
+    margin-right: 4rem;
 }
 
 #cogLogo
@@ -61,4 +65,9 @@ p
 #pricing
 {
     text-decoration: underline;
+}
+
+#certsHeader
+{
+    font-size: 1.8rem;
 }
