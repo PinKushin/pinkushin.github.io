@@ -42,6 +42,11 @@ p
     text-decoration: none;
 }
 
+.certs
+{
+    max-height: 75vh;
+}
+
 #smallBusisnessImg
 {
     max-height: 25vh;
@@ -61,4 +66,9 @@ p
 #pricing
 {
     text-decoration: underline;
+}
+
+#certsHeader
+{
+    min-width: 75vw;
 }
