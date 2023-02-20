@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.50639edb.css",
+    "main.css": "/static/css/main.04d440e1.css",
     "main.js": "/static/js/main.461e7c23.js",
     "static/js/787.cf366161.chunk.js": "/static/js/787.cf366161.chunk.js",
     "static/media/BecomeAGameMakerCert.jpg": "/static/media/BecomeAGameMakerCert.3dd2a9221e3c126226fc.jpg",
@@ -12,12 +12,12 @@
     "static/media/CogRound.png": "/static/media/CogRound.396f0d464d8ed7b44b72.png",
     "static/media/FullLogoRound.png": "/static/media/FullLogoRound.28178b324169e057ff0d.png",
     "index.html": "/index.html",
-    "main.50639edb.css.map": "/static/css/main.50639edb.css.map",
+    "main.04d440e1.css.map": "/static/css/main.04d440e1.css.map",
     "main.461e7c23.js.map": "/static/js/main.461e7c23.js.map",
     "787.cf366161.chunk.js.map": "/static/js/787.cf366161.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.50639edb.css",
+    "static/css/main.04d440e1.css",
     "static/js/main.461e7c23.js"
   ]
 }
