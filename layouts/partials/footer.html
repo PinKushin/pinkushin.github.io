@@ -28,12 +28,17 @@
           </a>
         </li>
         <li>
-          {{- /* Official unmodified asset from brand.linkedin.com. Their kit
-                 ships PNG only - no SVG - and the policy forbids recolouring,
-                 so this one stays raster and keeps its own blue. alt is empty
-                 because the visible word "LinkedIn" already names the link. */}}
+          {{- /* Official unmodified assets from brand.linkedin.com; their kit
+                 ships PNG only, no SVG. Their policy forbids recolouring, so
+                 rather than tint one file we swap between the two variants
+                 they supply - white on the dark default, black in light mode.
+                 Both are 840x779, so the switch cannot shift layout. alt is
+                 empty because the visible word "LinkedIn" names the link. */}}
           <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">
-            <img class="li-bug" src="{{ "img/LI-In-Bug.png" | relURL }}" alt="" width="635" height="540">LinkedIn
+            <picture>
+              <source srcset="{{ "img/InBug-Black.png" | relURL }}" media="(prefers-color-scheme: light)">
+              <img class="li-bug" src="{{ "img/InBug-White.png" | relURL }}" alt="" width="840" height="779">
+            </picture>LinkedIn
           </a>
         </li>
         <li>

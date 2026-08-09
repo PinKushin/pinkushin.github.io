@@ -413,7 +413,8 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   font-size: 0.95rem;
 }
 .site-footer li a:hover { color: var(--accent); text-decoration: underline; }
-.li-bug { height: 1.25em; width: auto; flex: none; }
+.site-footer li a picture { display: inline-flex; flex: none; }
+.li-bug { height: 1.25em; width: auto; }
 
 .footer-legal {
   border-top: 1px solid var(--border);
