@@ -1,36 +1,36 @@
 name: Build & deploy to GitHub Pages
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+env:
+  HUGO_VERSION: 0.164.0
+
 jobs:
   build:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-      - name: Set email
-        run: git config --global user.email "${{ secrets.adminemail }}"
-      - name: Set username
-        run: git config --global user.name "${{ secrets.adminname }}"
-      - name: npm install command
-        run: npm install
-      - name: Run build command
-        run: npm run build
+        uses: actions/checkout@v5
+
+      - name: Install Hugo
+        run: |
+          curl -sSLo hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+
+      - name: Build
+        run: hugo --minify --gc --printPathWarnings --printUnusedTemplates
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: public

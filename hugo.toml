@@ -1,0 +1,67 @@
+baseURL = "https://pinkushin.github.io/"
+locale = "en-us"
+title = "JDM Development"
+enableRobotsTXT = false
+
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  author = "John Moore"
+  description = "Software by John Moore — .NET libraries, desktop apps, and tooling."
+  email = "JDMDev4u@gmail.com"
+  github = "https://github.com/PinKushin"
+  linkedin = "https://www.linkedin.com/in/john-moore-b32b37259/"
+  freecodecamp = "https://www.freecodecamp.org/pinkushin"
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[markup.highlight]
+  noClasses = false
+  style = "github-dark"
+
+# Deny-by-default. Nothing in these layouts spawns processes, reads the
+# environment, or touches the network at build time, so every capability
+# stays empty rather than relying on Hugo's permissive defaults.
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = []
+    osEnv = []
+  [security.funcs]
+    getenv = []
+  [security.http]
+    methods = []
+    urls = []
+
+# Internal entries use pageRef, not url: .IsMenuCurrent cannot resolve a raw
+# url, so the active-page state (and aria-current) silently never fires.
+[menus]
+  [[menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+    [menus.main.params]
+      icon = "house"
+
+  [[menus.main]]
+    name = "Programs"
+    pageRef = "/programs"
+    weight = 20
+    [menus.main.params]
+      icon = "package"
+
+  [[menus.main]]
+    name = "Certificates"
+    pageRef = "/certificates"
+    weight = 30
+    [menus.main.params]
+      icon = "award"
+
+  [[menus.main]]
+    name = "GitHub"
+    url = "https://github.com/PinKushin"
+    weight = 40
+    [menus.main.params]
+      icon = "github"
+      external = true

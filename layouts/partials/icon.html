@@ -1,0 +1,6 @@
+{{- /* Inlines an SVG from assets/icons. Call as: {{ partial "icon.html" "github" }} */ -}}
+{{- with resources.Get (printf "icons/%s.svg" .) -}}
+  {{- .Content | safeHTML -}}
+{{- else -}}
+  {{- errorf "icon.html: no icon named %q in assets/icons" . -}}
+{{- end -}}

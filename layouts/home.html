@@ -1,0 +1,38 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>{{ .Title }}</h1>
+      <div class="lede">{{ .Content }}</div>
+      <div class="hero-actions">
+        <a class="btn" href="{{ "/programs/" | relURL }}">
+          <span class="icon">{{ partial "icon.html" "package" }}</span>See the programs
+        </a>
+        <a class="btn btn--ghost" href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon">{{ partial "icon.html" "github" }}</span>GitHub
+        </a>
+      </div>
+    </div>
+    <span class="hero-mark" aria-hidden="true">{{ partial "icon.html" "logo-mark" }}</span>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head">
+    <h2>Programs</h2>
+    <a href="{{ "/programs/" | relURL }}">All programs</a>
+  </div>
+  <div class="grid">
+    {{- range first 4 (where .Site.RegularPages "Section" "programs") }}
+      {{ partial "program-card.html" . }}
+    {{- end }}
+  </div>
+</section>
+
+{{ with .Site.GetPage "/hire" }}
+<section class="wrap section">
+  <h2>{{ .Title }}</h2>
+  <div class="prose">{{ .Content }}</div>
+</section>
+{{ end }}
+{{ end }}

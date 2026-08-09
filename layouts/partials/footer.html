@@ -1,0 +1,56 @@
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <span class="brand-mark footer-mark">{{ partial "icon.html" "logo-mark" }}</span>
+      <p class="muted">{{ .Site.Params.description }}</p>
+    </div>
+
+    <nav aria-labelledby="footer-programs">
+      <h2 id="footer-programs">Programs</h2>
+      <ul class="plain">
+        {{- range (where .Site.RegularPages "Section" "programs") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-elsewhere">
+      <h2 id="footer-elsewhere">Elsewhere</h2>
+      <ul class="plain">
+        <li>
+          <a href="mailto:{{ .Site.Params.email }}">
+            <span class="icon">{{ partial "icon.html" "mail" }}</span>Email
+          </a>
+        </li>
+        <li>
+          <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener noreferrer">
+            <span class="icon">{{ partial "icon.html" "github" }}</span>GitHub
+          </a>
+        </li>
+        <li>
+          {{- /* Official unmodified assets from brand.linkedin.com; their kit
+                 ships PNG only, no SVG. Their policy forbids recolouring, so
+                 rather than tint one file we swap between the two variants
+                 they supply - white on the dark default, black in light mode.
+                 Both are 840x779, so the switch cannot shift layout. alt is
+                 empty because the visible word "LinkedIn" names the link. */}}
+          <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">
+            <picture>
+              <source srcset="{{ "img/InBug-Black.png" | relURL }}" media="(prefers-color-scheme: light)">
+              <img class="li-bug" src="{{ "img/InBug-White.png" | relURL }}" alt="" width="840" height="779">
+            </picture>LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="{{ .Site.Params.freecodecamp }}" target="_blank" rel="noopener noreferrer">
+            <span class="icon">{{ partial "icon.html" "code-xml" }}</span>freeCodeCamp
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap footer-legal">
+    <p>© {{ now.Year }} {{ .Site.Params.author }}. Built with Hugo.</p>
+  </div>
+</footer>

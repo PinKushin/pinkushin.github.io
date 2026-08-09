@@ -1,0 +1,55 @@
+{{ define "main" }}
+<article class="wrap section">
+  <div class="program-head">
+    {{ with .Params.icon }}<span class="program-icon">{{ partial "icon.html" . }}</span>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.status }}<span class="status status--{{ . | urlize }}">{{ . }}</span>{{ end }}
+  </div>
+
+  {{ with .Params.tagline }}<p class="lede">{{ . }}</p>{{ end }}
+
+  <dl class="facts">
+    {{ with .Params.platforms }}
+    <div><dt>Platforms</dt><dd>{{ delimit . ", " }}</dd></div>
+    {{ end }}
+    {{ with .Params.tech }}
+    <div><dt>Built with</dt><dd>{{ delimit . ", " }}</dd></div>
+    {{ end }}
+    {{ with .Params.license }}
+    <div><dt>License</dt><dd>{{ . }}</dd></div>
+    {{ end }}
+  </dl>
+
+  <div class="card-links program-actions">
+    {{ with .Params.repo }}
+    <a class="btn" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "github" }}</span>Source on GitHub
+    </a>
+    {{ end }}
+    {{ with .Params.nuget }}
+    <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "nuget" }}</span>NuGet
+    </a>
+    {{ end }}
+    {{ with .Params.docs }}
+    <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "book-open" }}</span>Documentation
+    </a>
+    {{ end }}
+    {{ with .Params.site }}
+    <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "external-link" }}</span>Website
+    </a>
+    {{ end }}
+  </div>
+
+  {{ with .Params.install }}
+  <h2>Install</h2>
+  <pre class="install"><code>{{ . }}</code></pre>
+  {{ end }}
+
+  <div class="prose">{{ .Content }}</div>
+
+  <p class="back"><a href="{{ "/programs/" | relURL }}">← All programs</a></p>
+</article>
+{{ end }}

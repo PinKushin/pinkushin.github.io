@@ -1,0 +1,453 @@
+:root {
+  color-scheme: dark light;
+
+  --bg: #08090c;
+  --bg-raised: #12141a;
+  --bg-sunken: #050609;
+  --border: #232733;
+  --border-strong: #3a4152;
+  --text: #f4f6fa;
+  --text-muted: #aab3c2;
+  --accent: #8ecbff;
+  --accent-strong: #2f8fd8;
+  --ok: #6bd39a;
+  --warn: #e8b56b;
+  --idle: #8f97a6;
+
+  /* Syntax token colours for the logo's code lines, taken from the Hiberbee
+     theme for Visual Studio (sergiye/hiberbeeTheme, HiberbeeDark.vstheme).
+     The brace stays currentColor so it still follows the theme. */
+  --tok-keyword: #ee7762;
+  --tok-string: #ffd866;
+  --tok-type: #00b7c3;
+  --tok-number: #0078d7;
+
+  --wrap: 68rem;
+  --radius: 10px;
+  --step: 1rem;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbfbf9;
+    --bg-raised: #ffffff;
+    --bg-sunken: #f1f1ee;
+    --border: #e0e0da;
+    --border-strong: #c6c6be;
+    --text: #16181d;
+    --text-muted: #5d6068;
+    --accent: #1c6ea8;
+    --accent-strong: #14537f;
+    --ok: #1e7a4b;
+    --warn: #8a5a06;
+    --idle: #6b7280;
+
+    /* Hiberbee's own light variant. Its dark tokens are unusable here - the
+       #ffd866 string yellow sits at about 1.4:1 on this background. */
+    --tok-keyword: #cf222e;
+    --tok-string: #b32315;
+    --tok-type: #0000ff;
+    --tok-number: #8c8fa1;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3 { line-height: 1.2; font-weight: 600; margin: 0 0 0.5em; }
+h1 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.8rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.75rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.125rem; }
+p { margin: 0 0 var(--step); }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-strong); }
+
+img { max-width: 100%; height: auto; }
+ul.plain { list-style: none; margin: 0; padding: 0; }
+.muted { color: var(--text-muted); }
+
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  z-index: 10;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+.wrap {
+  width: min(100% - 2.5rem, var(--wrap));
+  margin-inline: auto;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+.icon svg { width: 1.15em; height: 1.15em; }
+
+/* ---------- header / nav ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-sunken);
+}
+.nav-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding-block: 0.85rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.brand-mark { display: inline-flex; flex: none; }
+.brand-mark svg { width: 2rem; height: 2rem; }
+.brand-text {
+  font-size: 1.075rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.brand-text span { color: var(--text-muted); font-weight: 400; }
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.35rem;
+  margin: 0;
+  padding: 0;
+}
+/* Padding is on every link, not just the active one, so switching pages
+   cannot shift the nav's layout. */
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+.site-nav a:hover { color: var(--text); background: var(--bg-raised); }
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  background: var(--bg-raised);
+  box-shadow: inset 0 0 0 1px var(--border-strong), inset 0 -2px 0 var(--accent);
+}
+.site-nav a[aria-current="page"] .icon { color: var(--accent); }
+
+/* ---------- hero ---------- */
+
+.hero { border-bottom: 1px solid var(--border); }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+.hero-mark { justify-self: center; color: var(--text); }
+.hero-mark svg { width: min(100%, 13rem); height: auto; }
+
+.lede { color: var(--text-muted); font-size: 1.075rem; }
+.lede p:last-child { margin-bottom: 0; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+
+@media (max-width: 46rem) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-mark { display: none; }
+}
+
+/* Below this width the four nav items cannot fit one row with both icon and
+   label (~422px needed). Labels alone fit in ~334px, so the icons go rather
+   than the words — an icon-only nav would be ambiguous. */
+@media (max-width: 34rem) {
+  .wrap { width: min(100% - 1.5rem, var(--wrap)); }
+  .site-nav .icon { display: none; }
+  .site-nav ul { gap: 0.3rem 0.25rem; }
+  .site-nav a { padding: 0.3rem 0.5rem; font-size: 0.85rem; }
+  .nav-wrap { gap: 0.6rem 1rem; padding-block: 0.7rem; }
+  .brand-text { font-size: 1rem; }
+  .program-head h1 { overflow-wrap: anywhere; }
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent-strong);
+  background: var(--accent-strong);
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.btn:hover { filter: brightness(1.1); color: #fff; }
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.btn--ghost:hover { background: var(--bg-raised); color: var(--text); filter: none; }
+
+/* ---------- sections & cards ---------- */
+
+.section { padding-block: clamp(2.25rem, 5vw, 3.5rem); }
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.section-head h2 { margin: 0; }
+
+/* Two columns once there is room, not auto-fit: auto-fit gave three across at
+   desktop, which left the fourth card alone beside a wide empty gap. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+}
+@media (min-width: 44rem) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+/* Explicit grid rather than flex wrapping: the badge sits on its own row every
+   time, so cards line up regardless of title length. Under flex it wrapped
+   only for the longer titles, which made the row look ragged. min-width:0 on
+   the title still stops a long name scrolling the page sideways. */
+.card-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+.card-head h3 { margin: 0; grid-column: 2; grid-row: 1; }
+.card-head h3 a { overflow-wrap: anywhere; }
+.card-head .status { grid-column: 2; grid-row: 2; justify-self: start; }
+.card-icon { display: inline-flex; grid-column: 1; grid-row: 1 / span 2; }
+.card-icon svg { width: 2.5rem; height: 2.5rem; }
+.card-head a { text-decoration: none; }
+.card-head a:hover { text-decoration: underline; }
+.card-tagline { color: var(--text-muted); margin: 0; flex: 1; }
+.card-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; }
+
+.status {
+  flex: none;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+/* Maturity, not release state: a deliberate 0.x means the public contracts
+   are not frozen yet, so nothing here claims "released". */
+.status--stable { color: var(--ok); border-color: var(--ok); }
+.status--beta { color: var(--ok); border-color: var(--ok); }
+.status--alpha { color: var(--warn); border-color: var(--warn); }
+.status--pre-alpha { color: var(--idle); border-color: var(--idle); }
+.status--planned { color: var(--idle); border-color: var(--idle); }
+
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+.tags li {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.1rem 0.5rem;
+}
+
+/* ---------- program page ---------- */
+
+.program-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.program-head h1 { margin: 0; }
+.program-icon { display: inline-flex; flex: none; }
+.program-icon svg { width: 3.25rem; height: 3.25rem; }
+.program-actions { margin-block: 1.75rem; }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+  margin: 1.75rem 0 0;
+  padding: 1rem 1.25rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.facts dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.facts dd { margin: 0.2rem 0 0; }
+
+.install {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+}
+.install code { font-family: var(--mono); font-size: 0.9rem; }
+
+.back { margin-top: 2.5rem; }
+
+/* ---------- prose ---------- */
+
+.prose { max-width: 62ch; }
+.prose h2 { margin-top: 2rem; }
+.prose h3 { margin-top: 1.5rem; }
+.prose ul, .prose ol { padding-left: 1.25rem; }
+.prose li { margin-bottom: 0.35rem; }
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+}
+.prose pre {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+.prose pre code { background: none; border: 0; padding: 0; }
+.prose table { width: 100%; border-collapse: collapse; }
+.prose th, .prose td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- certificates ---------- */
+
+/* Same fix as .grid: auto-fit stranded the fourth certificate on its own row
+   beside a wide gap. Two columns above the breakpoint, one below. */
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (min-width: 44rem) {
+  .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.cert {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cert img { display: block; width: 100%; height: auto; }
+.cert-meta { padding: 0.9rem 1.1rem 1.1rem; }
+.cert-meta h2 { font-size: 1rem; margin: 0 0 0.15rem; }
+.cert-meta p { margin: 0; font-size: 0.9rem; }
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-sunken);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2rem;
+  padding-block: 2.5rem 1.5rem;
+}
+.footer-mark { margin-bottom: 0.75rem; }
+.footer-mark svg { width: 2.4rem; height: 2.4rem; }
+.site-footer h2 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+.site-footer li { margin-bottom: 0.35rem; }
+.site-footer li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.site-footer li a:hover { color: var(--accent); text-decoration: underline; }
+.site-footer li a picture { display: inline-flex; flex: none; }
+.li-bug { height: 1.25em; width: auto; }
+
+.footer-legal {
+  border-top: 1px solid var(--border);
+  padding-block: 1.1rem;
+}
+.footer-legal p { margin: 0; font-size: 0.88rem; color: var(--text-muted); }

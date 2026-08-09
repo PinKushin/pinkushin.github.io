@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="wrap section">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="prose lede">{{ . }}</div>{{ end }}
+
+  <ul class="cert-grid plain">
+    {{- range hugo.Data.certificates }}
+    {{- $src := resources.Get .image }}
+    {{- if not $src }}{{ errorf "certificates.yaml: no image at assets/%s" .image }}{{ end }}
+    {{- $img := $src.Process "resize 1200x webp q82" }}
+    <li class="cert">
+      <img src="{{ $img.RelPermalink }}"
+           alt="{{ .alt }}"
+           width="{{ $img.Width }}"
+           height="{{ $img.Height }}"
+           loading="lazy"
+           decoding="async">
+      <div class="cert-meta">
+        <h2>{{ .name }}</h2>
+        <p class="muted">{{ .issuer }}{{ with .year }} · {{ . }}{{ end }}</p>
+      </div>
+    </li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}
