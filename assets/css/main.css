@@ -14,6 +14,14 @@
   --warn: #e8b56b;
   --idle: #8f97a6;
 
+  /* Syntax token colours for the logo's code lines, taken from the Hiberbee
+     theme for Visual Studio (sergiye/hiberbeeTheme, HiberbeeDark.vstheme).
+     The brace stays currentColor so it still follows the theme. */
+  --tok-keyword: #ee7762;
+  --tok-string: #ffd866;
+  --tok-type: #00b7c3;
+  --tok-number: #0078d7;
+
   --wrap: 68rem;
   --radius: 10px;
   --step: 1rem;
@@ -35,6 +43,13 @@
     --ok: #1e7a4b;
     --warn: #8a5a06;
     --idle: #6b7280;
+
+    /* Hiberbee's own light variant. Its dark tokens are unusable here - the
+       #ffd866 string yellow sits at about 1.4:1 on this background. */
+    --tok-keyword: #cf222e;
+    --tok-string: #b32315;
+    --tok-type: #0000ff;
+    --tok-number: #8c8fa1;
   }
 }
 
