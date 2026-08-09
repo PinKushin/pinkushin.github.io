@@ -1,11 +1,10 @@
 ---
 title: "Working together"
-description: "Rates and availability for contract software development work."
+description: "Available for contract software development work — get in touch for a quote."
 ---
 
-Available for contract work. $20 USD per hour, minimum. A mildly interactive
-page normally estimates at 4–8 hours; a static page like this one is 2–4. Time
-is tracked with WakaTime — you pay for time spent writing your application, not
-for anything else.
+Available for contract work — .NET applications, libraries, tooling, and web
+work. Scope and timelines vary enough that a fixed rate card doesn't say much
+useful, so tell me what you need built and I'll quote it.
 
 Reach me at [JDMDev4u@gmail.com](mailto:JDMDev4u@gmail.com).
