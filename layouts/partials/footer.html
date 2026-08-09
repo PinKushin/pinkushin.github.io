@@ -1,9 +1,7 @@
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      {{- with resources.Get "img/logo-full.png" }}
-      <img class="footer-logo" src="{{ .RelPermalink }}" alt="" width="{{ .Width }}" height="{{ .Height }}">
-      {{- end }}
+      <span class="brand-mark footer-mark">{{ partial "icon.html" "logo-mark" }}</span>
       <p class="muted">{{ .Site.Params.description }}</p>
     </div>
 

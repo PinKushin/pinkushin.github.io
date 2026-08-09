@@ -13,9 +13,7 @@
         </a>
       </div>
     </div>
-    {{- with resources.Get "img/logo-cog.png" }}
-    <img class="hero-logo" src="{{ .RelPermalink }}" alt="" width="{{ .Width }}" height="{{ .Height }}">
-    {{- end }}
+    <span class="hero-mark" aria-hidden="true">{{ partial "icon.html" "logo-mark" }}</span>
   </div>
 </section>
 

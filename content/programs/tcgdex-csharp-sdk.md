@@ -5,6 +5,7 @@ status: "Released"
 weight: 10
 repo: "https://github.com/PinKushin/TcgDex.CSharpSdk"
 nuget: "https://www.nuget.org/packages/TcgDex.CSharpSdk"
+docs: "https://pinkushin.github.io/TcgDex.CSharpSdk/"
 platforms: [".NET 8", ".NET 10", "netstandard2.0", ".NET Framework 4.6.1+"]
 tech: ["C#", ".NET", "NuGet", "Native AOT"]
 install: "dotnet add package TcgDex.CSharpSdk"

@@ -107,7 +107,22 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   gap: 1rem 2rem;
   padding-block: 0.85rem;
 }
-.brand img { display: block; height: 2.35rem; width: auto; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.brand-mark { display: inline-flex; flex: none; }
+.brand-mark svg { width: 2rem; height: 2rem; }
+.brand-text {
+  font-size: 1.075rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.brand-text span { color: var(--text-muted); font-weight: 400; }
 
 .site-nav ul {
   list-style: none;
@@ -142,7 +157,8 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   align-items: center;
   padding-block: clamp(2.5rem, 6vw, 4.5rem);
 }
-.hero-logo { justify-self: center; width: min(100%, 15rem); }
+.hero-mark { justify-self: center; color: var(--border-strong); }
+.hero-mark svg { width: min(100%, 13rem); height: auto; }
 
 .lede { color: var(--text-muted); font-size: 1.075rem; }
 .lede p:last-child { margin-bottom: 0; }
@@ -151,7 +167,7 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
 
 @media (max-width: 46rem) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-logo { display: none; }
+  .hero-mark { display: none; }
 }
 
 /* ---------- buttons ---------- */
@@ -352,7 +368,8 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   gap: 2rem;
   padding-block: 2.5rem 1.5rem;
 }
-.footer-logo { height: 2.6rem; width: auto; margin-bottom: 0.75rem; }
+.footer-mark { margin-bottom: 0.75rem; }
+.footer-mark svg { width: 2.4rem; height: 2.4rem; }
 .site-footer h2 {
   font-size: 0.78rem;
   text-transform: uppercase;
