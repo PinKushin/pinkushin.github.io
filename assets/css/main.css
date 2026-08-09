@@ -177,7 +177,7 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   align-items: center;
   padding-block: clamp(2.5rem, 6vw, 4.5rem);
 }
-.hero-mark { justify-self: center; color: var(--accent); }
+.hero-mark { justify-self: center; color: var(--text); }
 .hero-mark svg { width: min(100%, 13rem); height: auto; }
 
 .lede { color: var(--text-muted); font-size: 1.075rem; }

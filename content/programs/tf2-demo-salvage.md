@@ -2,7 +2,7 @@
 title: "Tf2DemoSalvage"
 tagline: "A standalone parser for Team Fortress 2 .dem files — built to read demos from any era of TF2's 18-year history, including ones Valve's own client updates have broken."
 status: "Alpha"
-icon: "demo-playback"
+icon: "tf2"
 weight: 30
 repo: "https://github.com/PinKushin/Tf2DemoSalvage"
 platforms: ["Windows", "Linux"]
@@ -37,3 +37,9 @@ Not started: the 2D viewer (Phase 2) and 3D viewer (Phase 3).
 of gameplay packets. The latter needs the property list flattened — entity deltas
 index into a list built by merging nested tables, applying exclusions, then
 sorting `SPROP_CHANGES_OFTEN` properties forward.
+
+---
+
+The emblem on this page is a Team Fortress 2 *style* logo by PD Balthazar,
+released into the public domain via Wikimedia Commons. It is fan-made and not
+an official Valve asset. This project remains unaffiliated with Valve.
