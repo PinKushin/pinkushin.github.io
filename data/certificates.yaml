@@ -1,0 +1,19 @@
+- name: CS50x — Introduction to Computer Science
+  issuer: Harvard University (edX)
+  image: img/certs/cs50x.png
+  alt: CS50x certificate issued to John Moore by Harvard University
+
+- name: Responsive Web Design
+  issuer: freeCodeCamp
+  image: img/certs/html.png
+  alt: Responsive Web Design certificate issued to John Moore by freeCodeCamp
+
+- name: JavaScript Algorithms and Data Structures
+  issuer: freeCodeCamp
+  image: img/certs/javascript.png
+  alt: JavaScript Algorithms and Data Structures certificate issued to John Moore by freeCodeCamp
+
+- name: Become a Game Maker
+  issuer: GameMaker
+  image: img/certs/gamemaker.jpg
+  alt: Become a Game Maker certificate issued to John Moore

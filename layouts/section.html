@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="wrap section">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="prose lede">{{ . }}</div>{{ end }}
+
+  <div class="grid">
+    {{- range .Pages }}
+      {{ partial "program-card.html" . }}
+    {{- end }}
+  </div>
+</div>
+{{ end }}

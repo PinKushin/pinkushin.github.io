@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="{{ "/" | relURL }}">
+      {{- with resources.Get "img/logo-full.png" }}
+      <img src="{{ .RelPermalink }}" alt="{{ $.Site.Title }} home" width="{{ .Width }}" height="{{ .Height }}">
+      {{- end }}
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {{- range .Site.Menus.main }}
+        {{- $current := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+        <li>
+          <a href="{{ .URL }}"
+             {{ with .Params.external }}target="_blank" rel="noopener noreferrer"{{ end }}
+             {{ if $current }}aria-current="page"{{ end }}>
+            {{ with .Params.icon }}<span class="icon">{{ partial "icon.html" . }}</span>{{ end }}
+            <span>{{ .Name }}</span>
+          </a>
+        </li>
+        {{- end }}
+      </ul>
+    </nav>
+  </div>
+</header>

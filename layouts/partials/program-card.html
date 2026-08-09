@@ -1,0 +1,23 @@
+<article class="card">
+  <div class="card-head">
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ with .Params.status }}<span class="status status--{{ . | urlize }}">{{ . }}</span>{{ end }}
+  </div>
+
+  {{ with .Params.tagline }}<p class="card-tagline">{{ . }}</p>{{ end }}
+
+  {{ with .Params.tech }}
+  <ul class="tags">
+    {{- range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{ end }}
+
+  <div class="card-links">
+    <a class="btn" href="{{ .RelPermalink }}">Details</a>
+    {{ with .Params.repo }}
+    <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "github" }}</span>Source
+    </a>
+    {{ end }}
+  </div>
+</article>
