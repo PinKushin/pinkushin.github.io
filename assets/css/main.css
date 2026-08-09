@@ -238,10 +238,15 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
 }
 .section-head h2 { margin: 0; }
 
+/* Two columns once there is room, not auto-fit: auto-fit gave three across at
+   desktop, which left the fourth card alone beside a wide empty gap. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  grid-template-columns: 1fr;
   gap: 1.15rem;
+}
+@media (min-width: 44rem) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .card {
@@ -253,18 +258,20 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   border-radius: var(--radius);
   padding: 1.25rem;
 }
-/* Wraps and min-width:0 so a long title plus a long status badge cannot push
-   past the card edge and scroll the page sideways on narrow screens. */
+/* Explicit grid rather than flex wrapping: the badge sits on its own row every
+   time, so cards line up regardless of title length. Under flex it wrapped
+   only for the longer titles, which made the row look ragged. min-width:0 on
+   the title still stops a long name scrolling the page sideways. */
 .card-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
   gap: 0.5rem 0.75rem;
 }
-.card-head h3 { margin: 0; flex: 1 1 auto; min-width: 0; }
+.card-head h3 { margin: 0; grid-column: 2; grid-row: 1; }
 .card-head h3 a { overflow-wrap: anywhere; }
-.card-icon { display: inline-flex; flex: none; }
+.card-head .status { grid-column: 2; grid-row: 2; justify-self: start; }
+.card-icon { display: inline-flex; grid-column: 1; grid-row: 1 / span 2; }
 .card-icon svg { width: 2.5rem; height: 2.5rem; }
 .card-head a { text-decoration: none; }
 .card-head a:hover { text-decoration: underline; }
