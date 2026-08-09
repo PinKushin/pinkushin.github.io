@@ -389,11 +389,16 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
 
 /* ---------- certificates ---------- */
 
+/* Same fix as .grid: auto-fit stranded the fourth certificate on its own row
+   beside a wide gap. Two columns above the breakpoint, one below. */
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 2rem;
+}
+@media (min-width: 44rem) {
+  .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .cert {
   background: var(--bg-raised);
