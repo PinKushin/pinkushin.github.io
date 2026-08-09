@@ -1,7 +1,7 @@
 ---
 title: "WindowsDriverCore"
 tagline: "Windows UI automation driver work in C#."
-status: "Early"
+status: "Pre-alpha"
 icon: "steering-wheel"
 weight: 40
 repo: "https://github.com/PinKushin/WindowsDriverCore"

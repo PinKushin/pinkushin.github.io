@@ -282,9 +282,12 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   color: var(--text-muted);
   white-space: nowrap;
 }
-.status--released { color: var(--ok); border-color: var(--ok); }
-.status--in-development { color: var(--warn); border-color: var(--warn); }
-.status--early { color: var(--warn); border-color: var(--warn); }
+/* Maturity, not release state: a deliberate 0.x means the public contracts
+   are not frozen yet, so nothing here claims "released". */
+.status--stable { color: var(--ok); border-color: var(--ok); }
+.status--beta { color: var(--ok); border-color: var(--ok); }
+.status--alpha { color: var(--warn); border-color: var(--warn); }
+.status--pre-alpha { color: var(--idle); border-color: var(--idle); }
 .status--planned { color: var(--idle); border-color: var(--idle); }
 
 .tags {

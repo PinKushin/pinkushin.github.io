@@ -1,7 +1,7 @@
 ---
 title: "Pokemon Battle Journal"
 tagline: "A .NET MAUI app for logging and analyzing Pokémon TCG battle records on Windows and Android."
-status: "In development"
+status: "Alpha"
 icon: "pokeball"
 weight: 20
 repo: "https://github.com/PinKushin/PokemonBattleJournal"

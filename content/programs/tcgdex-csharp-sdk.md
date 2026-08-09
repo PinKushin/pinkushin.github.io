@@ -1,7 +1,7 @@
 ---
 title: "TcgDex.CSharpSdk"
 tagline: "A .NET SDK for the TCGdex Pokémon TCG API — strongly typed models, a fluent query builder, and first-class Native AOT support."
-status: "Released"
+status: "Beta"
 icon: "card-back"
 weight: 10
 repo: "https://github.com/PinKushin/TcgDex.CSharpSdk"
@@ -19,6 +19,14 @@ syntax, and first-class support for dependency injection, trimming, and Native
 AOT.
 
 No API key required — TCGdex is free, public, and read-only.
+
+## Why 0.1 and not 1.0
+
+The package is on NuGet and the API is complete enough to use, but the version
+is deliberately 0.x. Under semantic versioning, 1.0 is a promise that the
+public contracts are frozen — every breaking change after it costs a major
+version. Shipping 0.1 first buys room to find anything that was missed without
+having to publish a 2.0 to correct it.
 
 ## Reach
 
