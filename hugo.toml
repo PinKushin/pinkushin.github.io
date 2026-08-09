@@ -34,24 +34,26 @@ disableKinds = ["taxonomy", "term", "rss"]
     methods = []
     urls = []
 
+# Internal entries use pageRef, not url: .IsMenuCurrent cannot resolve a raw
+# url, so the active-page state (and aria-current) silently never fires.
 [menus]
   [[menus.main]]
     name = "Home"
-    url = "/"
+    pageRef = "/"
     weight = 10
     [menus.main.params]
       icon = "house"
 
   [[menus.main]]
     name = "Programs"
-    url = "/programs/"
+    pageRef = "/programs"
     weight = 20
     [menus.main.params]
       icon = "package"
 
   [[menus.main]]
     name = "Certificates"
-    url = "/certificates/"
+    pageRef = "/certificates"
     weight = 30
     [menus.main.params]
       icon = "award"

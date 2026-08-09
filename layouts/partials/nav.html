@@ -8,6 +8,10 @@
       <ul>
         {{- range .Site.Menus.main }}
         {{- $current := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+        {{- if and (not $current) .Page }}
+          {{- /* A program page should light up "Programs" too. */}}
+          {{- $current = and (ne .Page.RelPermalink "/") (hasPrefix $.RelPermalink .Page.RelPermalink) }}
+        {{- end }}
         <li>
           <a href="{{ .URL }}"
              {{ with .Params.external }}target="_blank" rel="noopener noreferrer"{{ end }}

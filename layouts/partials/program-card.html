@@ -1,5 +1,6 @@
 <article class="card">
   <div class="card-head">
+    {{ with .Params.icon }}<span class="card-icon">{{ partial "icon.html" . }}</span>{{ end }}
     <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{ with .Params.status }}<span class="status status--{{ . | urlize }}">{{ . }}</span>{{ end }}
   </div>

@@ -2,6 +2,7 @@
 title: "TcgDex.CSharpSdk"
 tagline: "A .NET SDK for the TCGdex Pokémon TCG API — strongly typed models, a fluent query builder, and first-class Native AOT support."
 status: "Released"
+icon: "card-back"
 weight: 10
 repo: "https://github.com/PinKushin/TcgDex.CSharpSdk"
 nuget: "https://www.nuget.org/packages/TcgDex.CSharpSdk"

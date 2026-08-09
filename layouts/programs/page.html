@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article class="wrap section">
   <div class="program-head">
+    {{ with .Params.icon }}<span class="program-icon">{{ partial "icon.html" . }}</span>{{ end }}
     <h1>{{ .Title }}</h1>
     {{ with .Params.status }}<span class="status status--{{ . | urlize }}">{{ . }}</span>{{ end }}
   </div>

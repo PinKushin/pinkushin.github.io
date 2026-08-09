@@ -2,6 +2,7 @@
 title: "Tf2DemoSalvage"
 tagline: "A standalone parser for Team Fortress 2 .dem files — built to read demos from any era of TF2's 18-year history, including ones Valve's own client updates have broken."
 status: "Early"
+icon: "demo-playback"
 weight: 30
 repo: "https://github.com/PinKushin/Tf2DemoSalvage"
 platforms: ["Windows", "Linux"]
