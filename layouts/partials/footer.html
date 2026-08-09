@@ -28,8 +28,12 @@
           </a>
         </li>
         <li>
+          {{- /* Official unmodified asset from brand.linkedin.com. Their kit
+                 ships PNG only - no SVG - and the policy forbids recolouring,
+                 so this one stays raster and keeps its own blue. alt is empty
+                 because the visible word "LinkedIn" already names the link. */}}
           <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">
-            <span class="icon">{{ partial "icon.html" "briefcase" }}</span>LinkedIn
+            <img class="li-bug" src="{{ "img/LI-In-Bug.png" | relURL }}" alt="" width="635" height="540">LinkedIn
           </a>
         </li>
         <li>
