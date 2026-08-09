@@ -175,6 +175,19 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   .hero-mark { display: none; }
 }
 
+/* Below this width the four nav items cannot fit one row with both icon and
+   label (~422px needed). Labels alone fit in ~334px, so the icons go rather
+   than the words — an icon-only nav would be ambiguous. */
+@media (max-width: 34rem) {
+  .wrap { width: min(100% - 1.5rem, var(--wrap)); }
+  .site-nav .icon { display: none; }
+  .site-nav ul { gap: 0.3rem 0.25rem; }
+  .site-nav a { padding: 0.3rem 0.5rem; font-size: 0.85rem; }
+  .nav-wrap { gap: 0.6rem 1rem; padding-block: 0.7rem; }
+  .brand-text { font-size: 1rem; }
+  .program-head h1 { overflow-wrap: anywhere; }
+}
+
 /* ---------- buttons ---------- */
 
 .btn {
@@ -225,13 +238,17 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
   border-radius: var(--radius);
   padding: 1.25rem;
 }
+/* Wraps and min-width:0 so a long title plus a long status badge cannot push
+   past the card edge and scroll the page sideways on narrow screens. */
 .card-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.5rem 0.75rem;
 }
-.card-head h3 { margin: 0; flex: 1; }
+.card-head h3 { margin: 0; flex: 1 1 auto; min-width: 0; }
+.card-head h3 a { overflow-wrap: anywhere; }
 .card-icon { display: inline-flex; flex: none; }
 .card-icon svg { width: 2.5rem; height: 2.5rem; }
 .card-head a { text-decoration: none; }
