@@ -23,7 +23,7 @@
     <a href="{{ "/programs/" | relURL }}">All programs</a>
   </div>
   <div class="grid">
-    {{- range first 4 (where .Site.RegularPages "Section" "programs") }}
+    {{- range first 6 (where .Site.RegularPages "Section" "programs") }}
       {{ partial "program-card.html" . }}
     {{- end }}
   </div>
