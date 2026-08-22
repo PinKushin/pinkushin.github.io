@@ -1,7 +1,7 @@
 ---
 title: "Garm3n VIP-Quad"
 tagline: "A fork of a competitive Team Fortress 2 HUD, brought back into line with the shipped game — with the reasoning for every change written down, including the changes that turned out to be wrong."
-status: "Beta"
+status: "Stable"
 icon: "tf2"
 weight: 60
 repo: "https://github.com/PinKushin/Garm3n-VIP-Quad"

@@ -70,3 +70,50 @@ which the CSS has always defined but nothing used, so the blurb now explains it.
 Hardcoding the count is a small liability — it has now been wrong once — but
 `{{ len .Pages }}` in prose reads worse than a number, and the blurb is edited
 whenever a program is added anyway.
+
+---
+
+## Corrections recorded
+
+### C1. REVERSAL (by the owner) — Garm3n VIP-Quad is **Stable**, not Beta
+
+Entry 2 badged the HUD Beta on the strength of four items its
+`UPDATE-CHECKLIST.md` still listed as unverified. Three of those four had
+already been checked; the fourth is reasoned away, not outstanding.
+
+**The owner:**
+
+> "the hud is stable really, i should have the fork update that, the winpanels
+> and 3d player model and status icons are all right, the only thing i havent
+> tested is the linux fallbacks and they shouldnt be needed because the custom
+> fonts needed are shipped with the hud"
+
+So the badge is Stable, and the fork's checklist has been corrected in the same
+pass — the stale document is what produced the wrong badge, and leaving it stale
+would produce the wrong badge again.
+
+**The reasoning worth keeping is about the Linux fallbacks**, because it is the
+one item that stays untested and is *still* not a gap. This HUD ships its own
+faces — `Novecentowide-DemiBold`, `Novecentowide-Medium`, `Paula`, `FORMASGE`,
+`symbol` — inside `resource/`, so the fonts the design actually depends on
+travel with it and need no system fallback on any platform. Stock's
+`linux_fonts` entries exist to substitute for faces the client expects to find
+installed; a HUD that carries its own does not need the substitution.
+
+**What I got wrong, and it is a pattern worth naming:** I read an unverified
+checklist row as evidence of an unverified *thing*. It is evidence about the
+document. A row saying "not verified" and a row nobody updated after verifying
+look identical, and only the person who ran the game can tell them apart.
+Reading a stale doc as current state is the same error class as trusting a test
+that has never been red.
+
+### C2. The visual result was confirmed by the owner, not by me
+
+Entry 3's changes and both new pages shipped with the appearance explicitly
+unconfirmed — no screenshot was available in that session, so structure and text
+were verified and looks were not. The owner then looked:
+
+> "The site looks good to me."
+
+Recorded because the gap was stated as a gap, and closing it is worth the same
+line the caveat got.
