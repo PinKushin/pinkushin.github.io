@@ -175,12 +175,46 @@ from outside. Publishing it would put an unverifiable assertion about a named
 third party on the owner's site, and the page is stronger without it because
 everything else on it can be clicked and confirmed.
 
-### The copy follows the merged diff, not the PR description
+### The gap between the PR description and the merged diff is the story
 
 The PR body says MessagePack and `System.Text.RegularExpressions` were both
-promoted to direct references. The merged diff promotes only
-`System.Text.RegularExpressions`; MessagePack does not appear in it. The page
-describes the diff.
+promoted to direct references. The merged diff promotes only the latter. I first
+recorded that as an unexplained discrepancy and had the page quietly describe
+the diff. The review thread explains it, and the explanation is the most
+site-worthy thing in the whole contribution.
+
+The maintainer's first response was "why was MessagePack added? and same for
+RegularExpression". Working through the answer, the owner found and stated his
+own error — that moving the SDK, build tools and colour compiler forward already
+carries MessagePack, so only the regex pin was actually needed — and proposed
+the narrower change himself before being told to. The maintainer then asked for
+the extra reference to come out and for the remaining one to be normalised to
+single-line style, and merged.
+
+So the page now leads with the over-pin and the pushback rather than presenting
+a clean four-line fix. Being asked "why" and answering it precisely enough to
+find your own mistake is a better thing to show than a PR that merged without
+comment.
+
+**Not on the page, though it is in the thread:** it was the owner's first pull
+request to anyone, and he asked the maintainer whether to close and re-open it
+rather than pushing a follow-up commit. The first-PR fact *is* on the page,
+because he offered it; the specific question is not, because nothing is gained
+by narrating a beginner's uncertainty about git mechanics eighteen months later.
+
+### "Written by hand, with no AI involved"
+
+The owner's words:
+
+> "this contribution was made without AI too, i did the update by hand and had
+> pushback from sigey because i pinned too much"
+
+Recorded as his, and put on the page as a plain statement of fact rather than a
+boast or a disclaimer. Worth keeping because in 2026 it is a claim that will
+only get harder to make and easier to doubt, and because the rest of this site
+is built with AI assistance — so stating it on the one item where it is true is
+the honest arrangement, and staying silent everywhere would let the reader
+assume it about everything.
 
 Verified against upstream on 2026-08-22: `VsixColorCompiler 17.11.35325.10` and
 `System.Text.RegularExpressions 4.3.1` are still in `HiberbeeTheme.csproj`
