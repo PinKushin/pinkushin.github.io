@@ -259,3 +259,41 @@ reports as a green tick with a warning nobody reads.
 
 Verified 2026-08-22: both jobs zero annotations, no `pages-build-deployment`
 run for the deployed commit, and all six live URLs 200.
+
+## 7. The Create React App leftovers are gone
+
+Four deletions, all chosen by the owner, none of which touch the live site.
+
+**The 16 open Dependabot PRs (#2–#21)** were npm bumps against the old CRA
+stack — webpack, babel, react-router, lodash. `master` has had no
+`package.json` since the Hugo rebuild, so not one of them could apply to
+anything. Closed with a comment saying so, branches deleted.
+
+**They were frozen, not accumulating.** The newest was opened 2026-02-12 and
+the rebuild landed 2026-08-09, so Dependabot had already stopped on its own
+when the manifest left the default branch — the dependency graph is built from
+the default branch, and an empty graph produces no updates. Worth stating
+plainly because "I turned off the thing flooding your repo" would be a better
+story and a false one.
+
+**Dependabot security updates disabled anyway**, as belt-and-braces:
+`automated-security-fixes` now `enabled=false`. **Vulnerability alerts are
+deliberately left on** (the endpoint still returns 204). Alerts are
+information; updates are pull requests. If this repo ever gains a manifest
+again, re-enable the updates — nothing here will remind you.
+
+**`gh-pages` deleted.** Entry 6 kept it as the rollback path; that path is
+spent now that Actions-native publishing has deployed successfully several
+times. Deleting it doubles as the strongest available proof the switch is
+real: the branch the site used to be served from no longer exists, and the
+site still returns 200 on every URL. A rollback would now mean reverting the
+workflow, which rebuilds the branch anyway.
+
+**`pages-build-deployment` is off the Actions list.** The workflow itself
+cannot be deleted — GitHub generates it under `dynamic/pages/` and it is not a
+file in this repo — but it disappears from the list once it has no runs, so
+its two remaining runs were deleted. It will come back if Pages is ever
+switched to branch publishing, which is correct: it is a symptom of that
+setting, not an artefact of its own.
+
+`master` is now the only branch in the repository.
