@@ -29,6 +29,17 @@
   </div>
 </section>
 
+{{/* Deliberately a home-page block rather than a nav entry: the programs are
+     meant to be the pronounced thing, and one small upstream PR should not
+     compete with them for a place in the nav. See docs/DECISIONS.md entry 5. */}}
+{{ with .Site.GetPage "/contributions" }}
+<section class="wrap section">
+  <h2>{{ .Title }}</h2>
+  <p class="lede">Work that went into someone else's project rather than my own.</p>
+  <div class="prose">{{ .Content }}</div>
+</section>
+{{ end }}
+
 {{ with .Site.GetPage "/hire" }}
 <section class="wrap section">
   <h2>{{ .Title }}</h2>
