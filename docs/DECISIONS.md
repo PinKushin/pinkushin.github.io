@@ -117,3 +117,73 @@ were verified and looks were not. The owner then looked:
 
 Recorded because the gap was stated as a gap, and closing it is worth the same
 line the caveat got.
+
+---
+
+## 5. Contributions are a home-page block, not a nav entry
+
+The hiberbeeTheme work is a merged PR in someone else's repository. It has no
+repo of the owner's to link — the fork was deleted once the change was upstream,
+which is the correct thing to do with a fork that has served its purpose and the
+reason there is nothing on this site to point at but the pull request itself.
+
+That rules out a program card: every one of those links a repo the owner owns
+and carries a maturity badge, and neither applies to a PR.
+
+Three placements were put to the owner — a home-page block, a `/contributions/`
+page with a fourth nav entry, or a block on the programs page. **He chose the
+home-page block.** The reason it was recommended: the site was deliberately
+repositioned so the programs are the pronounced thing, and one small upstream
+PR should not sit beside Programs in the nav competing for attention.
+
+**The owner's own reason is better than that one and is the one to keep:**
+
+> "the contributes are moreso about me then about my projects themselves, so a
+> seperate page for them individually, doesnt make sense unless we are linking
+> to the actual projects website, which i wouldnt be against doing."
+
+A contribution is a fact about the person, not an artefact he maintains. That
+is why a page *per contribution* is wrong in a way that has nothing to do with
+nav clutter: there is no thing of his for such a page to be about. It also
+settles what a contribution entry should link — **the project's own home**,
+since the reader who wants the project should land on the project rather than on
+a page here describing it secondhand.
+
+So the Hiberbee entry leads with the Visual Studio Marketplace listing (25,804
+installs on 2026-08-22, quoted on the page as "a little over 25,000" and dated,
+because that number moves), then the pull request, then the source. Three links,
+none of them to this site.
+
+Structurally it follows the `/hire` pattern exactly — content lives in
+`content/contributions.md` and `layouts/home.html` pulls it in with
+`.Site.GetPage`. So a second contribution is an edit to one markdown file, and
+promoting the lot to a real page later is a nav entry plus deleting six lines of
+template.
+
+### What the page does not say, and why
+
+The owner's account is that the maintainer has since adopted the same
+dependency-scanning practice, so there is nothing left for him to catch:
+
+> "my extra analyzers started being used by the OG creator so I have nothing to
+> fix anymore"
+
+That is not on the page. It is a claim about **another person's** working
+practice, and the repository shows no evidence either way — no
+`Directory.Build.props`, no `NuGet.config`, nothing that would make it checkable
+from outside. Publishing it would put an unverifiable assertion about a named
+third party on the owner's site, and the page is stronger without it because
+everything else on it can be clicked and confirmed.
+
+### The copy follows the merged diff, not the PR description
+
+The PR body says MessagePack and `System.Text.RegularExpressions` were both
+promoted to direct references. The merged diff promotes only
+`System.Text.RegularExpressions`; MessagePack does not appear in it. The page
+describes the diff.
+
+Verified against upstream on 2026-08-22: `VsixColorCompiler 17.11.35325.10` and
+`System.Text.RegularExpressions 4.3.1` are still in `HiberbeeTheme.csproj`
+unchanged, while the SDK and build tools have been moved on by the maintainer.
+That is what the "two of them are still there word for word" line rests on, and
+it is worth re-checking before anyone repeats it.
