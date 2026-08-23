@@ -221,3 +221,41 @@ Verified against upstream on 2026-08-22: `VsixColorCompiler 17.11.35325.10` and
 unchanged, while the SDK and build tools have been moved on by the maintainer.
 That is what the "two of them are still there word for word" line rests on, and
 it is worth re-checking before anyone repeats it.
+
+## 6. Pages publishes from the workflow, not from a `gh-pages` branch
+
+Recorded a commit late — the reasoning was written into the commit body but not
+here, and this file is the thing that survives.
+
+**The trigger was a single annotation**, on a run whose tick was green:
+`actions/upload-artifact@v4` forced onto Node 24, Node 20 deprecated. It was
+unfixable from inside this repo. Branch publishing makes GitHub run a second
+workflow of its own after ours — generated under `dynamic/pages/`, not stored
+here — and that action is pinned inside it. There was no `uses:` line to bump.
+
+So the fix was structural rather than a version bump: upload the Pages artifact
+ourselves, and the generated pipeline never runs. Two consequences worth having
+anyway — the deploy stops being two builds of the same commit, and `contents`
+drops from `write` to `read`, because nothing pushes a branch any more.
+
+**`actions/configure-pages` is deliberately absent**, though GitHub's own Hugo
+starter workflow includes it. Its purpose is to hand the generator a base URL,
+and `hugo.toml` sets `baseURL` explicitly, so it has nothing to supply here. A
+pinned external that does nothing is still a pinned external that goes stale —
+the same reasoning that keeps this site off themes and off npm.
+
+**The `gh-pages` branch was kept.** It served the live site until the first
+workflow deploy succeeded, and it is the way back if the switch had failed.
+Now vestigial, and deleting it is the owner's call rather than a tidy-up to
+perform unasked.
+
+### The versions are the lesson
+
+Written from memory, this workflow would have said `upload-pages-artifact@v3`
+and `deploy-pages@v4`. Looked up, they are **v5** and **v5**, with
+`configure-pages` on **v6** and `checkout` on **v7**. Staleness written from
+memory is precisely what produced the annotation being fixed here, and it
+reports as a green tick with a warning nobody reads.
+
+Verified 2026-08-22: both jobs zero annotations, no `pages-build-deployment`
+run for the deployed commit, and all six live URLs 200.
