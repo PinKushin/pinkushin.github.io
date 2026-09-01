@@ -4,8 +4,8 @@ Source for [pinkushin.github.io](https://pinkushin.github.io/) — a home for th
 programs I build, plus the portfolio bits.
 
 Built with [Hugo](https://gohugo.io/). No theme, no Node, no package manager —
-the layouts are five files in `layouts/` and the only third-party assets are the
-icon SVGs, which are vendored into `assets/icons/`.
+the layouts are eleven small files in `layouts/` and the only third-party assets
+are the icon SVGs, which are vendored into `assets/icons/`.
 
 ## Running it locally
 
@@ -33,7 +33,8 @@ the nav, the home page cards, and the footer all read the section.
 ---
 title: "Program name"
 tagline: "One sentence describing it."
-status: "Released"        # Released | In development | Early | Planned
+status: "Alpha"           # Stable | Beta | Alpha | Pre-alpha | Planned
+                          # Maturity, never release state. Not "Released".
 weight: 50                # sort order, lower is first
 repo: "https://github.com/PinKushin/..."
 nuget: "https://www.nuget.org/packages/..."   # optional
@@ -68,4 +69,8 @@ Drop the image in `static/img/certs/` and add an entry to
 ## Deployment
 
 Pushing to `master` triggers `.github/workflows/ghpages.yml`, which builds with
-a pinned Hugo version and publishes `public/` to the `gh-pages` branch.
+a pinned Hugo version and uploads `public/` straight to the Pages service.
+
+There is no `gh-pages` branch. Branch publishing makes GitHub run a second
+workflow of its own afterwards, generated outside this repo, and the actions it
+pins cannot be updated from here. See `docs/DECISIONS.md` entry 6.
