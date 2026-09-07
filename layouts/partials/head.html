@@ -1,12 +1,24 @@
 {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+{{- /* Deliberately NOT minified, unlike the CSS: this file is vendored from
+       upstream and never edited here, so keeping it byte-identical is what
+       makes `curl gc.zgo.at/count.js | diff - assets/js/count.js` a one-step
+       update check. Vendoring costs automatic updates; that diff is the
+       repayment. */ -}}
+{{- $analytics := resources.Get "js/count.js" | fingerprint -}}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{- /* Skipped under `hugo server`, whose live-reload injects a script that
          script-src 'none' would block. Every published page carries it. */}}
   {{ if not hugo.IsServer }}
+  {{- /* connect-src AND img-src both name the GoatCounter endpoint, and both
+         are required. count.js sends via navigator.sendBeacon, then falls back
+         to an <img> when the beacon fails — its own comment says that failure
+         is "mostly due to being blocked by CSP". Grant only connect-src and
+         the fallback is blocked too, so hits are lost with nothing in the
+         console to say so. The upstream CSP doc mentions connect-src alone. */}}
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; base-uri 'self'; object-src 'none'">
+        content="default-src 'self'; img-src 'self' data: https://pinkushin.goatcounter.com; style-src 'self'; script-src 'self'; connect-src 'self' https://pinkushin.goatcounter.com; base-uri 'self'; object-src 'none'">
   {{ end }}
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
@@ -28,4 +40,20 @@
   <meta property="og:image" content="{{ "icon-512.png" | absURL }}">
 
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+  {{- /* GoatCounter, served from this origin rather than gc.zgo.at, so
+         script-src stays 'self' and no third-party code executes here — only
+         the beacon leaves. Same reasoning as the vendored icons.
+
+         Gated with the CSP above so `hugo server` sends no hits: local page
+         loads would otherwise land in the real stats as genuine traffic.
+
+         Sends path, referrer, title, screen width, query string and a bot
+         score. No cookie, no persistent identifier. localStorage is touched
+         only for GoatCounter's own `skipgc` opt-out flag. */}}
+  {{ if not hugo.IsServer }}
+  <script data-goatcounter="https://pinkushin.goatcounter.com/count"
+          async src="{{ $analytics.RelPermalink }}"
+          integrity="{{ $analytics.Data.Integrity }}"></script>
+  {{ end }}
 </head>

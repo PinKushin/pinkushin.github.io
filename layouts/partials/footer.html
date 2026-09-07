@@ -52,5 +52,10 @@
 
   <div class="wrap footer-legal">
     <p>© {{ now.Year }} {{ .Site.Params.author }}. Built with Hugo.</p>
+    {{- /* Every claim here is checkable in this repo: the script is
+           assets/js/count.js, vendored unmodified, and it sets no cookie. */}}
+    <p class="muted">Page visits are counted with
+      <a href="https://www.goatcounter.com/" target="_blank" rel="noopener noreferrer">GoatCounter</a>,
+      self-hosted script, no cookies, no IP addresses stored.</p>
   </div>
 </footer>
