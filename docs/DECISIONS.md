@@ -297,3 +297,83 @@ switched to branch publishing, which is correct: it is a symptom of that
 setting, not an artefact of its own.
 
 `master` is now the only branch in the repository.
+
+## 8. Analytics: GoatCounter, script vendored rather than loaded from theirs
+
+The owner wanted visitor telemetry, explicitly **not** a visible counter —
+"i dont want it to be seen in the ui like it use to be, that would be tacky now,
+but tracking how many people come to your page is good telemetry."
+
+That reframing is what made it feasible. A visible counter fed by a remote
+endpoint breaks the page when the endpoint is down; an invisible beacon that
+fails costs a data point and nothing else.
+
+### Hosted, not self-hosted — and the owner's stated reason was the weaker one
+
+He chose GoatCounter's hosted service over running it on the Oracle boxes:
+
+> "id prabably do 3 over 2 because i dont want to slow down the mut runs and the
+> fuzz box is single core so already kinda slow."
+
+The conclusion is right; the stated reason is not the load-bearing one.
+GoatCounter idles around 50 MB and near-zero CPU, so it would not measurably
+slow a mutation run on a 3-OCPU box — though contention on the single-core fuzz
+box is a fairer worry. What actually carries the decision: a public HTTP service
+puts attack surface on measurement infrastructure, the `flock` model there
+assumes nothing long-lived is listening, and self-hosting means owning uptime
+for a service whose whole value is being ignorable. Recorded so the decision
+survives on the sturdier reason.
+
+### The script is vendored; only the beacon is third-party
+
+`assets/js/count.js` is copied from `gc.zgo.at/count.js`, unmodified, ISC
+licensed, 9.2 KB. Serving it from this origin keeps `script-src 'self'`, so no
+third-party code executes on the site — only the beacon leaves it. The same
+reasoning that keeps the icons vendored.
+
+It is fingerprinted but deliberately **not** minified, unlike the CSS. Byte
+identity with upstream is what makes the update check one step:
+
+```bash
+curl -sSL https://gc.zgo.at/count.js | diff - assets/js/count.js
+```
+
+Vendoring costs automatic updates. That diff is the repayment, and it is the
+thing to run when GoatCounter changes.
+
+### CSP needs `img-src` as well as `connect-src`, and the docs do not say so
+
+Upstream's CSP page names `connect-src` only. Reading the vendored file shows
+`count.js` sends via `navigator.sendBeacon` and then falls back to an `<img>`,
+under its own comment: the beacon "mostly fails due to being blocked by CSP".
+
+Granting `connect-src` alone would block the beacon on any browser without
+`sendBeacon`, send it down the image path, and block that too — hits lost
+silently, with nothing in the console to explain it. Both directives name
+`https://pinkushin.goatcounter.com`.
+
+Found by reading the file before shipping it, which is the argument for reading
+vendored code rather than trusting its documentation.
+
+### No cookie, deliberately
+
+The owner's first instinct was a cookie. GoatCounter is cookieless by design —
+it holds site + IP + User-Agent in memory for up to 8 hours as a random string,
+and stores neither the IP, the full User-Agent, nor any tracker ID. A cookie
+would gain nothing and would drag in a consent banner, since analytics cookies
+need consent under ePrivacy where cookieless counting generally does not.
+`localStorage` is touched only for GoatCounter's own `skipgc` opt-out flag.
+
+Sent per pageview: path, referrer, title, screen width, query string, bot score.
+
+### Gated behind `not hugo.IsServer`, same as the CSP
+
+`hugo server` page loads would otherwise arrive in the real statistics as
+genuine traffic. The consequence: **the script cannot be tested locally.** The
+only real verification is the live site's network requests after a deploy.
+
+### Disclosed in the footer
+
+One line, linking GoatCounter, stating no cookies and no IP addresses stored.
+Every claim in it is checkable in this repo, which is the standard a disclosure
+has to meet to be worth printing.
