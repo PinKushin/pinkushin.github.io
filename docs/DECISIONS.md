@@ -377,3 +377,48 @@ only real verification is the live site's network requests after a deploy.
 One line, linking GoatCounter, stating no cookies and no IP addresses stored.
 Every claim in it is checkable in this repo, which is the standard a disclosure
 has to meet to be worth printing.
+
+### Confirmed live, 2026-09-07 — and how to recognise an agent's hit
+
+Verified from the deployed site under the real CSP:
+
+```
+scriptRan       "object"    count.js executed; SRI passed and script-src allows it
+filterResult    false       not suppressed
+beaconAccepted  true        navigator.sendBeacon queued the request
+```
+
+`beaconAccepted` is the decisive one: `sendBeacon` returns **false** when CSP
+blocks the destination, so `true` proves `connect-src` is right. The owner then
+confirmed both hits in the dashboard, which closes the loop this entry said
+could only be closed live.
+
+**The beacon is invisible in the Network tab, and that is not a fault.**
+`sendBeacon` fires as a background ping — it appears under Ping/Other rather
+than XHR/Fetch, and the browser-pane recorder missed it entirely. "No request in
+the Network tab" therefore reads exactly like "it is broken". Test with
+`navigator.sendBeacon(goatcounter.url())` and read the return value instead.
+
+**Reading the dashboard: "other" device + Chrome with no screen size is an
+automated hit**, not a visitor. The agent's beacon sent `s=0`, because the
+browser pane was not compositing frames, so `window.screen.width` read 0 —
+the same root cause as screenshots failing in that session. GoatCounter buckets
+device class from screen width and 0 matches nothing, so it lands in "other".
+Real visitors report a width; the owner's own Firefox visit came through as
+"pc monitor".
+
+Also worth knowing: count.js scores `navigator.webdriver` as bot 153, but the
+pane did **not** trip it — hits came through `b=0`, counting as real traffic.
+Bot detection here is weaker than it looks, so do not read a clean bot score as
+proof a hit was human.
+
+### Self-hits are counted, deliberately
+
+No `skipgc` opt-out is set. The owner: "i dont care if my visits inflate it too
+muc, being able to add a view to the site is a testing thing." Being able to
+generate a hit on demand is what makes the pipeline testable at all, given it
+cannot run under `hugo server`.
+
+The cost, for whenever the numbers start mattering: GoatCounter cannot
+retroactively separate his visits from real ones. Enabling `skipgc` later stops
+future self-hits and does nothing about the ones already recorded.
