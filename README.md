@@ -37,6 +37,9 @@ status: "Alpha"           # Stable | Beta | Alpha | Pre-alpha | Planned
                           # Maturity, never release state. Not "Released".
 weight: 50                # sort order, lower is first
 repo: "https://github.com/PinKushin/..."
+release: "https://github.com/PinKushin/.../releases"   # optional, "Download" button.
+                          # Link /releases, not /releases/latest: latest ignores
+                          # pre-releases and redirects to the list for a beta.
 nuget: "https://www.nuget.org/packages/..."   # optional
 docs: "https://..."                            # optional
 site: "https://..."                            # optional

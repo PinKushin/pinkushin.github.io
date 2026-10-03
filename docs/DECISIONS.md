@@ -422,3 +422,58 @@ cannot run under `hugo server`.
 The cost, for whenever the numbers start mattering: GoatCounter cannot
 retroactively separate his visits from real ones. Enabling `skipgc` later stops
 future self-hits and does nothing about the ones already recorded.
+
+## 9. Tf2DemoSalvage is Beta, and its page was rewritten from the release notes
+
+The owner's direction, in full: "TF2 Demo Salvage is in beta now and has a
+release, i need to update the website". The badge moves Alpha → Beta on that
+statement. The release is `v0.1.0-beta.6`, a GitHub pre-release, so the badge
+and the release agree.
+
+### The page was rewritten, not edited
+
+The old body said entity decoding did not work and the viewer was not started.
+Both were true when written and have been false for weeks: the release ships a
+3D viewer and a CLI that compiles text back to a byte-identical demo. Nothing
+about the old body was salvageable as a base, so it was replaced.
+
+### Source: the release notes, not the project's README
+
+The project's own `README.md` still says "2D viewer (Phase 2), 3D viewer
+(Phase 3): Not started" — the same drift as the HUD checklist in C1 above, a
+status document nobody updated after the work moved. Every figure
+on the page comes from the release notes, which are dated and written at ship
+time, and carry their own limits.
+
+One figure is kept with its limit rather than rounded up: the 459-demo census
+(2026-09-30) found no entity-stage failures and 214 full passes, but **has not
+been re-run since the fixes it prompted**, so the post-fix pass count is
+unknown. The page says so, because the tidy version — "decodes 459 demos" — is
+not what was measured.
+
+### Platforms: "Windows, Linux" → "Windows"
+
+The previous page claimed Linux. The release asset is a single `win-x64` zip, the
+viewer targets `net10.0-windows` on Direct3D 11, and the release's requirements
+say Windows 10 or 11. The CLI targets plain `net10.0` and CI builds on Ubuntu, so
+Linux for the CLI alone is plausible — but nothing ships for it, and the page
+should claim what a visitor can download. The owner did not address this; it is
+a change from his earlier text and is flagged for him to overrule.
+
+### A `release` front-matter key and a Download button
+
+New optional key on program pages, rendered as a ghost **Download** button after
+Source. This reverses the earlier practice of linking repositories and never
+releases, which existed because no project had a release.
+
+It links `/releases`, **not** `/releases/latest` and **not** a tag. Measured
+2026-10-02: `/releases/latest` returns a 302 to the plain list, because GitHub's
+"latest" ignores pre-releases and every Tf2DemoSalvage release is one. Pinning
+`v0.1.0-beta.6` would be stale within days — six betas shipped in two days.
+
+The button reuses the existing `package` icon rather than vendoring a new
+download glyph.
+
+Status badges still describe maturity, never release state (CLAUDE.md). A
+Download button is not release-state wording: Beta is the maturity claim, and
+the button is where the zip is.
