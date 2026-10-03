@@ -1,42 +1,66 @@
 ---
 title: "Tf2DemoSalvage"
-tagline: "A standalone parser for Team Fortress 2 .dem files — built to read demos from any era of TF2's 18-year history, including ones Valve's own client updates have broken."
-status: "Alpha"
+tagline: "Reads Team Fortress 2 .dem files from any era of the game's history — including demos the current client can no longer play — and plays them back in 3D."
+status: "Beta"
 icon: "tf2"
 weight: 30
 repo: "https://github.com/PinKushin/Tf2DemoSalvage"
-platforms: ["Windows", "Linux"]
-tech: ["C#", ".NET", "CLI"]
-description: "A standalone parser and eventual viewer for Team Fortress 2 demo files, working across every era of the game."
+release: "https://github.com/PinKushin/Tf2DemoSalvage/releases"
+platforms: ["Windows"]
+tech: ["C#", ".NET", "Direct3D 11", "CLI"]
+license: "MIT"
+description: "A standalone reader and 3D viewer for Team Fortress 2 demo files, working across every era of the game."
 ---
 
-An independent, clean-room parser for TF2 demo files. It ships no Valve-authored
-game assets — maps are resolved from your own TF2 install or a source you
-configure, not bundled. Not affiliated with Valve.
+An independent, clean-room tool for TF2 demo files. It ships no Valve-authored
+game assets — the viewer reads maps, models, materials and sounds from your own
+TF2 install, and the zip contains none of them. Not affiliated with Valve.
 
-## Status — early, and honest about it
+## What it is
 
-Phase 1 is in progress. The container and much of the network message layer
-decode against real demos. Entity data — where player positions live — does not
-yet.
+TF2 demos carry the entity schema they were recorded against, so a demo is
+readable without the game that made it. The current client validates that schema
+against its own and refuses old demos; this reads what the file provides and
+doesn't. The download holds two programs:
 
-Done and tested: the bit reader and varint decoding (unit tested, mutation
-tested, fuzzed), the demo header, the command stream, and a text dump CLI —
-`tf2demosalvage <demo.dem>` prints a readable dump.
+- **`tf2demosalvage`** — a command-line tool. It decompiles a demo to readable
+  text, to JSON Lines, or to an assembly form that **compiles back to a
+  byte-identical demo**.
+- **`tf2demoview`** — a 3D viewer. It plays a demo back with the game's own maps,
+  models, materials and sounds, and takes key bindings from your own TF2 config.
 
-Partial: net messages, and the entity schema. `dem_datatables` parses and
-flattens, `svc_PacketEntities` headers decode, and 98% of property *value*
-encodings are implemented. Entity iteration hasn't started, and the missing 2%
-includes `m_vecOrigin` — which is, inconveniently, the interesting one.
+## Beta, and what that means here
 
-Not started: the 2D viewer (Phase 2) and 3D viewer (Phase 3).
+Decoding is well tested. The viewer is usable and is still visibly different
+from the game in places. The release notes list those places, and the repository
+tracks each one by number.
 
-## Where decoding stops
+The ones you are most likely to hit: demos recorded for hours on an idle server
+(the 1.3 GB and 2 GB ones found so far) work in the command-line tool but are
+too large for the viewer's timeline. A typical modern match holds about 4 GB in
+the viewer. There are no footsteps or landing sounds, because the game predicts
+those on the client and never records them in the demo.
 
-`svc_SignonState` in the signon stream, and `svc_PacketEntities` in roughly 90%
-of gameplay packets. The latter needs the property list flattened — entity deltas
-index into a list built by merging nested tables, applying exclusions, then
-sorting `SPROP_CHANGES_OFTEN` properties forward.
+## What has been measured
+
+- **Five network protocols — 11, 14, 15, 16 and 24 —** covering demos recorded on
+  clients from 2007, 2008, 2009, 2011 and 2013, plus a 2020 match. Each decodes
+  and round-trips in every test run. Protocols 17 to 23 have no known surviving
+  demo, so they are untested.
+- **A census of 459 distinct real-world demos** on 2026-09-30: the entity stage
+  failed on none. At that point 214 passed every stage. Every failure class the
+  census found has been fixed since, but **the census has not been re-run**, so
+  the post-fix pass count is not yet known.
+- **Text round-trips to the identical file**, held by the test suite for every
+  era above.
+- **Voice from every era:** Speex, Steam Voice, CELT and Opus.
+
+## Requirements
+
+Windows 10 or 11 (x64) with a Direct3D 11 GPU, and 8 GB of RAM at minimum — 16 GB
+recommended. Each program carries its own copy of .NET, so there is nothing else
+to install. The viewer needs your own TF2 install; without one it plays the demo
+without the game's maps and models. The command-line tool needs only the demo.
 
 ---
 

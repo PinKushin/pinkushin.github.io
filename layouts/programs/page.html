@@ -26,6 +26,11 @@
       <span class="icon">{{ partial "icon.html" "github" }}</span>Source on GitHub
     </a>
     {{ end }}
+    {{ with .Params.release }}
+    <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+      <span class="icon">{{ partial "icon.html" "package" }}</span>Download
+    </a>
+    {{ end }}
     {{ with .Params.nuget }}
     <a class="btn btn--ghost" href="{{ . }}" target="_blank" rel="noopener noreferrer">
       <span class="icon">{{ partial "icon.html" "nuget" }}</span>NuGet
